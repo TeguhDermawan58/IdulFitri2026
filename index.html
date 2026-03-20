@@ -662,11 +662,43 @@ function spawnTaunt() {
   setTimeout(() => el.remove(), 1500);
 }
 
-// Mobile: also escape on click (in case hover doesn't fire)
+// ── MOBILE FIX ──────────────────────────────────────────────
+// 1. touchstart → kabur SEBELUM jari bisa klik
+btnTerima.addEventListener('touchstart', function(e) {
+  e.preventDefault();  // cegah click event yang menyusul
+  escapeBtn();
+}, { passive: false });
+
+// 2. click → cadangan jika touchstart lolos
 btnTerima.addEventListener('click', function(e) {
   e.preventDefault();
+  e.stopImmediatePropagation();
   escapeBtn();
 });
+
+// 3. Proximity detection via touchmove di seluruh layar
+//    Kalau jari bergerak mendekati tombol dalam radius 90px → tombol kabur duluan
+document.addEventListener('touchmove', function(e) {
+  const modal = document.getElementById('modal-thr');
+  if (!modal.classList.contains('show')) return;
+  const touch = e.touches[0];
+  const tx = touch.clientX, ty = touch.clientY;
+  const r = btnTerima.getBoundingClientRect();
+  const cx = r.left + r.width / 2;
+  const cy = r.top  + r.height / 2;
+  const dist = Math.hypot(tx - cx, ty - cy);
+  if (dist < 90) escapeBtn();
+}, { passive: true });
+
+// 4. Bonus gyroscope: miringkan HP = tombol kabur 😈
+if (window.DeviceMotionEvent) {
+  window.addEventListener('devicemotion', function(e) {
+    const modal = document.getElementById('modal-thr');
+    if (!modal.classList.contains('show')) return;
+    const acc = e.accelerationIncludingGravity;
+    if (acc && (Math.abs(acc.x) > 6 || Math.abs(acc.y) > 12)) escapeBtn();
+  });
+}
 
 // Confetti
 function spawnConfetti() {
