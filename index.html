@@ -565,14 +565,16 @@ for (let i = 0; i < 8; i++) {
     </div>`;
 }
 
-// Random THR amount (always big, to taunt)
-const amounts = [
-  "Rp 999.999.999", "Rp 1.234.567.890", "Rp 750.000.000",
-  "Rp 500.000.000", "Rp 2.000.000.000", "Rp 888.888.888"
-];
-document.getElementById('thr-amount').textContent = amounts[Math.floor(Math.random()*amounts.length)];
+// Nominal diset saat openTHR() dipanggil
 
 function openTHR() {
+  // Random nominal setiap kali dibuka
+  const amounts = [
+    "Rp 999.999.999", "Rp 1.234.567.890", "Rp 750.000.000",
+    "Rp 500.000.000", "Rp 2.000.000.000", "Rp 888.888.888",
+    "Rp 1.500.000.000", "Rp 3.333.333.333", "Rp 777.777.777"
+  ];
+  document.getElementById('thr-amount').textContent = amounts[Math.floor(Math.random()*amounts.length)];
   document.getElementById('modal-thr').classList.add('show');
   positionTerimaBtn();
   spawnConfetti();
@@ -589,10 +591,7 @@ function closeAll() {
   resetTerimaBtn();
 }
 
-// Close modals when clicking overlay
-document.getElementById('modal-thr').addEventListener('click', function(e) {
-  if (e.target === this) closeAll();
-});
+// Close HANYA modal tolak saat klik overlay (THR modal tidak bisa ditutup dengan klik luar!)
 document.getElementById('modal-tolak').addEventListener('click', function(e) {
   if (e.target === this) closeAll();
 });
