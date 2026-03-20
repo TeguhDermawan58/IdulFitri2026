@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Hari Raya Idul Fitri 🌙</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4A017;
+    --gold-light: #F5C842;
+    --gold-dark: #A07810;
+    --green-deep: #0A3D2E;
+    --green-mid: #1A5C40;
+    --green-light: #2E8B57;
+    --cream: #FFF8E7;
+    --cream-dark: #F0E0B0;
+    --red-raya: #C0392B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--green-deep);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Animated starry background */
+  .stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .star {
+    position: absolute;
+    background: var(--gold-light);
+    border-radius: 50%;
+    animation: twinkle var(--dur, 2s) ease-in-out infinite alternate;
+  }
+  @keyframes twinkle {
+    from { opacity: 0.1; transform: scale(0.8); }
+    to   { opacity: 1;   transform: scale(1.2); }
+  }
+
+  /* Lanterns top */
+  .lanterns {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    pointer-events: none;
+    z-index: 1;
+    padding: 0 10px;
+  }
+  .lantern {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: swing var(--sw, 3s) ease-in-out infinite alternate;
+    transform-origin: top center;
+  }
+  @keyframes swing {
+    from { transform: rotate(-8deg); }
+    to   { transform: rotate(8deg); }
+  }
+  .lantern-body {
+    width: 28px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--gold-light), var(--red-raya), var(--gold-dark));
+    border-radius: 40% 40% 50% 50%;
+    box-shadow: 0 0 15px rgba(212, 160, 23, 0.7), 0 0 30px rgba(212, 160, 23, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  .lantern-body::after {
+    content: '';
+    position: absolute;
+    top: 20%; left: 20%;
+    width: 30%; height: 60%;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+  }
+  .lantern-cap {
+    width: 32px; height: 8px;
+    background: var(--gold-dark);
+    border-radius: 4px 4px 0 0;
+  }
+  .lantern-string {
+    width: 1px; height: 50px;
+    background: var(--gold-dark);
+  }
+  .lantern-tail {
+    width: 1px; height: 14px;
+    background: var(--gold);
+  }
+
+  /* Decorative rope */
+  .rope-line {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark), var(--gold), var(--gold-dark), transparent);
+    z-index: 2;
+  }
+
+  /* Main container */
+  .container {
+    position: relative;
+    z-index: 10;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 100px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Moon & crescent */
+  .moon-container {
+    position: relative;
+    margin-bottom: 24px;
+    animation: floatMoon 4s ease-in-out infinite alternate;
+  }
+  @keyframes floatMoon {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-12px); }
+  }
+  .moon {
+    font-size: 90px;
+    filter: drop-shadow(0 0 20px var(--gold)) drop-shadow(0 0 50px rgba(212,160,23,0.4));
+  }
+
+  /* Greeting text */
+  .greeting-top {
+    font-family: 'Amiri', serif;
+    font-size: clamp(14px, 4vw, 18px);
+    color: var(--gold-light);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 6px;
+  }
+  h1 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(36px, 10vw, 72px);
+    color: var(--gold);
+    line-height: 1.1;
+    text-shadow: 0 0 30px rgba(212,160,23,0.5), 2px 2px 0 var(--gold-dark);
+    margin-bottom: 6px;
+  }
+  h2 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(22px, 6vw, 40px);
+    color: var(--cream);
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  .divider {
+    width: 220px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 16px auto;
+  }
+  .divider::before, .divider::after {
+    content: '✦';
+    color: var(--gold);
+    font-size: 14px;
+    position: relative;
+    top: -9px;
+  }
+  .divider-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--gold);
+    font-size: 14px;
+    margin: 8px 0 20px;
+  }
+  .divider-wrap .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+  .divider-wrap .line.right {
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .pesan {
+    font-size: clamp(14px, 3.5vw, 16px);
+    color: var(--cream-dark);
+    line-height: 1.8;
+    max-width: 520px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+  }
+
+  /* Ornament row */
+  .ornament {
+    font-size: 28px;
+    letter-spacing: 12px;
+    margin: 14px 0 28px;
+    filter: drop-shadow(0 0 6px var(--gold));
+  }
+
+  /* THR Card */
+  .thr-section {
+    width: 100%;
+    max-width: 420px;
+    margin-top: 10px;
+  }
+  .thr-card {
+    background: linear-gradient(135deg, #8B0000, #C0392B, #8B0000);
+    border: 3px solid var(--gold);
+    border-radius: 20px;
+    padding: 28px 32px 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 0 60px rgba(255,255,255,0.04);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .thr-card:hover { transform: scale(1.02); }
+  .thr-card::before {
+    content: '囍';
+    position: absolute;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    top: -20px; right: -20px;
+    line-height: 1;
+  }
+  .thr-card::after {
+    content: '✿';
+    position: absolute;
+    font-size: 80px;
+    color: rgba(255,255,255,0.04);
+    bottom: -10px; left: -10px;
+  }
+  .thr-label {
+    font-family: 'Amiri', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    opacity: 0.8;
+    margin-bottom: 6px;
+  }
+  .thr-title {
+    font-family: 'Amiri', serif;
+    font-size: 32px;
+    color: var(--gold);
+    text-shadow: 0 0 15px var(--gold);
+    margin-bottom: 4px;
+  }
+  .thr-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+  }
+  .thr-btn-open {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #3B1A00;
+    border: none;
+    padding: 12px 36px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 20px rgba(212,160,23,0.6);
+    transition: all 0.2s;
+  }
+  .thr-btn-open:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 28px rgba(212,160,23,0.8);
+  }
+
+  /* THR Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.show { display: flex; }
+
+  .modal-box {
+    background: linear-gradient(160deg, #FFF8E7, #F0E0B0);
+    border: 4px solid var(--gold);
+    border-radius: 24px;
+    padding: 40px 32px 32px;
+    max-width: 380px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  @keyframes popIn {
+    from { transform: scale(0.5) rotate(-5deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0); opacity: 1; }
+  }
+
+  .modal-emoji { font-size: 56px; margin-bottom: 8px; }
+  .modal-title {
+    font-family: 'Amiri', serif;
+    font-size: 22px;
+    color: var(--green-deep);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .modal-amount {
+    font-family: 'Amiri', serif;
+    font-size: 42px;
+    color: var(--red-raya);
+    font-weight: 700;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+    margin: 8px 0 4px;
+  }
+  .modal-note {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  /* TERIMA button - the escaper */
+  #btn-terima {
+    background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    position: absolute; /* will be moved dynamically */
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    transition: background 0.2s;
+    z-index: 9999;
+    pointer-events: auto;
+  }
+
+  /* TOLAK button - the legit one */
+  #btn-tolak {
+    background: linear-gradient(135deg, #888, #555);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    transition: all 0.2s;
+    position: relative;
+  }
+  #btn-tolak:hover {
+    background: linear-gradient(135deg, #666, #333);
+  }
+
+  /* Taunt messages */
+  .taunt {
+    position: fixed;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--red-raya);
+    background: var(--cream);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 2px solid var(--red-raya);
+    pointer-events: none;
+    z-index: 9999;
+    animation: fadeUp 1.4s ease forwards;
+    white-space: nowrap;
+  }
+  @keyframes fadeUp {
+    0%   { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-50px); }
+  }
+
+  /* Tolak modal */
+  .tolak-box {
+    background: linear-gradient(160deg, #2c2c2c, #1a1a1a);
+    border: 3px solid var(--gold-dark);
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 340px;
+    width: 90%;
+    text-align: center;
+    color: #fff;
+    animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .tolak-box h3 {
+    font-family: 'Amiri', serif;
+    font-size: 26px;
+    color: var(--gold);
+    margin: 12px 0 8px;
+  }
+  .tolak-box p { font-size: 14px; color: #ccc; line-height: 1.6; margin-bottom: 20px; }
+  .btn-close {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #3B1A00;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 50px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Confetti */
+  .confetti-piece {
+    position: fixed;
+    width: 10px; height: 10px;
+    opacity: 0;
+    animation: confettiFall linear forwards;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 2px;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="stars" id="stars"></div>
+
+<!-- Rope -->
+<div class="rope-line"></div>
+
+<!-- Lanterns -->
+<div class="lanterns" id="lanterns"></div>
+
+<!-- Main -->
+<div class="container">
+  <div class="moon-container">
+    <div class="moon">🌙</div>
+  </div>
+
+  <div class="greeting-top">Minal Aidin Wal Faizin</div>
+  <h1>Selamat Hari Raya</h1>
+  <h2>Idul Fitri 1446 H</h2>
+
+  <div class="divider-wrap">
+    <div class="line"></div>
+    ✦ ☪ ✦
+    <div class="line right"></div>
+  </div>
+
+  <p class="pesan">
+    Mohon maaf lahir dan batin 🤲<br>
+    Semoga amal ibadah kita di bulan Ramadhan diterima Allah SWT,
+    dan kita kembali fitri seperti bayi yang baru lahir.<br>
+    Selamat berkumpul bersama keluarga tercinta! 🏠
+  </p>
+
+  <div class="ornament">☽ ✿ ☽</div>
+
+  <!-- THR Section -->
+  <div class="thr-section">
+    <div class="thr-card" onclick="openTHR()">
+      <div class="thr-label">Spesial buat kamu</div>
+      <div class="thr-title">💰 Amplop THR</div>
+      <div class="thr-sub">Klik untuk buka amplop kamu!</div>
+      <button class="thr-btn-open" onclick="event.stopPropagation(); openTHR()">
+        🎁 Ambil THR
+      </button>
+    </div>
+  </div>
+
+  <div class="footer">— Selamat Hari Raya —</div>
+</div>
+
+<!-- THR Modal -->
+<div class="modal-overlay" id="modal-thr">
+  <div class="modal-box" id="modal-box-inner">
+    <div class="modal-emoji">🤑</div>
+    <div class="modal-title">Selamat! Kamu dapat THR</div>
+    <div class="modal-amount" id="thr-amount">Rp 999.999.999</div>
+    <div class="modal-note">"Uang sungguhan, 100% asli, terpercaya, anti bohong*"</div>
+    <div class="btn-group" id="btn-group">
+      <button id="btn-tolak" onclick="openTolak()">Udah kaya / Udah besar ga butuh 😎</button>
+    </div>
+    <button id="btn-terima" onmouseenter="escapeBtn()" ontouchstart="escapeBtn()">Terima THR 💸</button>
+  </div>
+</div>
+
+<!-- Tolak Modal -->
+<div class="modal-overlay" id="modal-tolak">
+  <div class="tolak-box">
+    <div style="font-size:56px">😭</div>
+    <h3>Astaga, Hati Baja!</h3>
+    <p>THR <strong style="color:var(--gold)">Rp 999.999.999</strong> dengan berat hati dikembalikan ke mang kasir…<br><br>
+    Baiklah, orang kaya memang tidak butuh recehan. Rezeki kamu sudah melimpah, semoga makin berkah! 🙏</p>
+    <button class="btn-close" onclick="closeAll()">Tutup & Ikhlaskan 😇</button>
+  </div>
+</div>
+
+<script>
+// Generate stars
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 80; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 3 + 1;
+  s.style.cssText = `
+    width:${size}px; height:${size}px;
+    top:${Math.random()*100}%; left:${Math.random()*100}%;
+    --dur:${1.5 + Math.random()*3}s;
+    animation-delay:${Math.random()*3}s;
+  `;
+  starsEl.appendChild(s);
+}
+
+// Generate lanterns
+const lanternWrap = document.getElementById('lanterns');
+const swings = [2.5, 3.2, 2.8, 3.6, 2.3, 3.0, 2.7, 3.4];
+for (let i = 0; i < 8; i++) {
+  lanternWrap.innerHTML += `
+    <div class="lantern" style="--sw:${swings[i]}s; animation-delay:${i*0.3}s">
+      <div class="lantern-string"></div>
+      <div class="lantern-cap"></div>
+      <div class="lantern-body"></div>
+      <div class="lantern-tail"></div>
+    </div>`;
+}
+
+// Random THR amount (always big, to taunt)
+const amounts = [
+  "Rp 999.999.999", "Rp 1.234.567.890", "Rp 750.000.000",
+  "Rp 500.000.000", "Rp 2.000.000.000", "Rp 888.888.888"
+];
+document.getElementById('thr-amount').textContent = amounts[Math.floor(Math.random()*amounts.length)];
+
+function openTHR() {
+  document.getElementById('modal-thr').classList.add('show');
+  positionTerimaBtn();
+  spawnConfetti();
+}
+
+function openTolak() {
+  document.getElementById('modal-thr').classList.remove('show');
+  document.getElementById('modal-tolak').classList.add('show');
+}
+
+function closeAll() {
+  document.getElementById('modal-thr').classList.remove('show');
+  document.getElementById('modal-tolak').classList.remove('show');
+  resetTerimaBtn();
+}
+
+// Close modals when clicking overlay
+document.getElementById('modal-thr').addEventListener('click', function(e) {
+  if (e.target === this) closeAll();
+});
+document.getElementById('modal-tolak').addEventListener('click', function(e) {
+  if (e.target === this) closeAll();
+});
+
+// Escape button logic
+const taunts = [
+  "Mau kemana hayo? 😏", "Gak bisa dipegang! 😂", "Rezeki emang mesti dikejar~",
+  "Kabur terus nih THR-nya! 🏃", "Gesit banget! 😆", "Hehehe, coba lagi!",
+  "THR: 1, Kamu: 0 😜", "Amplopnya malu-malu kucing~", "Kejar teruuus! 💨",
+  "Masih mau nyerah? 😈", "Tanganmu lebih lambat dari rezekimu!", "Uhh hampir! 😬"
+];
+let escapeCount = 0;
+
+const btnTerima = document.getElementById('btn-terima');
+let isMoved = false;
+
+function positionTerimaBtn() {
+  const box = document.getElementById('modal-box-inner');
+  const rect = box.getBoundingClientRect();
+  btnTerima.style.position = 'fixed';
+  btnTerima.style.left = (rect.left + rect.width / 2 - 60) + 'px';
+  btnTerima.style.top  = (rect.top  + rect.height - 60) + 'px';
+}
+
+function resetTerimaBtn() {
+  isMoved = false;
+  positionTerimaBtn();
+  escapeCount = 0;
+}
+
+function escapeBtn() {
+  escapeCount++;
+  spawnTaunt();
+
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const bw = 130, bh = 46;
+  const padding = 20;
+
+  let newX, newY;
+  let tries = 0;
+  do {
+    newX = padding + Math.random() * (vw - bw - padding * 2);
+    newY = padding + Math.random() * (vh - bh - padding * 2);
+    tries++;
+  } while (tries < 20 && isNearTolak(newX, newY));
+
+  btnTerima.style.left = newX + 'px';
+  btnTerima.style.top  = newY + 'px';
+  isMoved = true;
+}
+
+function isNearTolak(x, y) {
+  const tolak = document.getElementById('btn-tolak');
+  const r = tolak.getBoundingClientRect();
+  return (x < r.right + 60 && x + 130 > r.left - 60 && y < r.bottom + 40 && y + 46 > r.top - 40);
+}
+
+function spawnTaunt() {
+  const msg = taunts[escapeCount % taunts.length];
+  const el = document.createElement('div');
+  el.className = 'taunt';
+  el.textContent = msg;
+  el.style.left = (20 + Math.random() * (window.innerWidth - 220)) + 'px';
+  el.style.top  = (window.innerHeight * 0.3 + Math.random() * 200) + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1500);
+}
+
+// Mobile: also escape on click (in case hover doesn't fire)
+btnTerima.addEventListener('click', function(e) {
+  e.preventDefault();
+  escapeBtn();
+});
+
+// Confetti
+function spawnConfetti() {
+  const colors = ['#D4A017','#C0392B','#2E8B57','#F5C842','#fff','#FF6B6B','#FFD700'];
+  for (let i = 0; i < 50; i++) {
+    setTimeout(() => {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.cssText = `
+        left:${Math.random()*100}vw;
+        top:-10px;
+        background:${colors[Math.floor(Math.random()*colors.length)]};
+        width:${6+Math.random()*8}px;
+        height:${6+Math.random()*8}px;
+        animation-duration:${1.5+Math.random()*2}s;
+        animation-delay:${Math.random()*0.5}s;
+        border-radius:${Math.random()>0.5?'50%':'2px'};
+      `;
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 3000);
+    }, i * 30);
+  }
+}
+</script>
+</body>
+</html>
